@@ -1,0 +1,6 @@
+@OrbitalReader.Api_HostAddress = http://localhost:5063
+
+GET {{OrbitalReader.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

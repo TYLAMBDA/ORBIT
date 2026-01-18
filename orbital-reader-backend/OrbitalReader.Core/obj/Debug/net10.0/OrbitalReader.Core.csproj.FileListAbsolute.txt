@@ -1,0 +1,11 @@
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Core\bin\Debug\net10.0\OrbitalReader.Core.deps.json
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Core\bin\Debug\net10.0\OrbitalReader.Core.dll
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Core\bin\Debug\net10.0\OrbitalReader.Core.pdb
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Core\obj\Debug\net10.0\OrbitalReader.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Core\obj\Debug\net10.0\OrbitalReader.Core.AssemblyInfoInputs.cache
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Core\obj\Debug\net10.0\OrbitalReader.Core.AssemblyInfo.cs
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Core\obj\Debug\net10.0\OrbitalReader.Core.csproj.CoreCompileInputs.cache
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Core\obj\Debug\net10.0\OrbitalReader.Core.dll
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Core\obj\Debug\net10.0\refint\OrbitalReader.Core.dll
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Core\obj\Debug\net10.0\OrbitalReader.Core.pdb
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Core\obj\Debug\net10.0\ref\OrbitalReader.Core.dll

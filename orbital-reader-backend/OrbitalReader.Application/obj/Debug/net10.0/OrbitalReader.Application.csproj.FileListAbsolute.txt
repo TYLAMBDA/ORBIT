@@ -1,0 +1,15 @@
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Application\bin\Debug\net10.0\OrbitalReader.Application.deps.json
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Application\bin\Debug\net10.0\OrbitalReader.Application.dll
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Application\bin\Debug\net10.0\OrbitalReader.Application.pdb
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Application\bin\Debug\net10.0\OrbitalReader.Core.dll
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Application\bin\Debug\net10.0\OrbitalReader.Core.pdb
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Application\obj\Debug\net10.0\OrbitalReader.Application.csproj.AssemblyReference.cache
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Application\obj\Debug\net10.0\OrbitalReader.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Application\obj\Debug\net10.0\OrbitalReader.Application.AssemblyInfoInputs.cache
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Application\obj\Debug\net10.0\OrbitalReader.Application.AssemblyInfo.cs
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Application\obj\Debug\net10.0\OrbitalReader.Application.csproj.CoreCompileInputs.cache
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Application\obj\Debug\net10.0\OrbitalR.FB44EE23.Up2Date
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Application\obj\Debug\net10.0\OrbitalReader.Application.dll
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Application\obj\Debug\net10.0\refint\OrbitalReader.Application.dll
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Application\obj\Debug\net10.0\OrbitalReader.Application.pdb
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Application\obj\Debug\net10.0\ref\OrbitalReader.Application.dll
