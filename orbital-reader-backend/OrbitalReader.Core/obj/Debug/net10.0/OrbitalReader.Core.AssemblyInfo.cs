@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OrbitalReader.Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+32af94ebb4d2f8c0bcac0f1b323819f5c9e26b40")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ac5240a1c72ae215e96c1230c2cc24e39b856b4a")]
 [assembly: System.Reflection.AssemblyProductAttribute("OrbitalReader.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OrbitalReader.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

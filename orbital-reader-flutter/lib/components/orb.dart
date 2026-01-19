@@ -40,44 +40,49 @@ class Orb extends StatelessWidget {
        top = (size.height - centerSize) / 2;
        left = (size.width - centerSize) / 2;
     } else {
-        // Docked Logic
+        // Docked Logic - Fixed position, fade only
         if (position == DockPosition.left) {
             top = (size.height - dockedSize) / 2;
-            left = isHidden ? -hiddenOffset : -visibleOffset;
+            left = -visibleOffset;
             if (isHidden) opacity = 0.0;
         } else if (position == DockPosition.right) {
             top = (size.height - dockedSize) / 2;
-            right = isHidden ? -hiddenOffset : -visibleOffset;
+            right = -visibleOffset;
             if (isHidden) opacity = 0.0;
         } else if (position == DockPosition.top) {
             left = (size.width - dockedSize) / 2;
-            top = isHidden ? -hiddenOffset : -visibleOffset;
+            top = -visibleOffset;
             if (isHidden) opacity = 0.0;
         } else if (position == DockPosition.bottom) {
              left = (size.width - dockedSize) / 2;
-             bottom = isHidden ? -hiddenOffset : -visibleOffset;
+             bottom = -visibleOffset;
              if (isHidden) opacity = 0.0;
         }
     }
 
-    return AnimatedPositioned(
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeOutCubic, // Changed from elasticOut to prevent "shaking" on hover edge
+    return Positioned(
       top: top,
       left: left,
       right: right,
       bottom: bottom,
       width: width,
       height: height,
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        onEnter: (_) => onHoverStart(),
-        onExit: (_) => onHoverEnd(),
-        child: GestureDetector(
-          onTap: onClick,
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.easeOut,
+      child: AnimatedOpacity(
+        duration: const Duration(milliseconds: 300),
+        opacity: opacity,
+        child: AnimatedScale(
+          duration: const Duration(milliseconds: 500),
+          scale: opacity == 0.0 ? 0.8 : 1.0,
+          curve: Curves.easeOutBack,
+          child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          onEnter: (_) => onHoverStart(),
+          onExit: (_) => onHoverEnd(),
+          child: GestureDetector(
+            onTap: onClick,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeOut,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               gradient: RadialGradient(
@@ -152,6 +157,8 @@ class Orb extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ),
+  ),
+);
   }
 }

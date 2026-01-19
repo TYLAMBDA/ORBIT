@@ -46,7 +46,7 @@ class _CyberButtonState extends State<CyberButton> with SingleTickerProviderStat
   @override
   Widget build(BuildContext context) {
     // Colors
-    final baseColor = widget.color ?? (widget.isPrimary ? Colors.cyanAccent : Colors.pinkAccent);
+    final baseColor = widget.color ?? (widget.isPrimary ? const Color(0xFF8B5CF6) : const Color(0xFF3B82F6)); // Purple/Blue
     final glowColor = baseColor.withOpacity(0.5);
 
     return MouseRegion(

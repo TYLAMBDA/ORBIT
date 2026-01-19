@@ -53,11 +53,11 @@ class GlassCard extends StatelessWidget {
 
     // Hover Enhancements
     final effectiveShadow = isHovered 
-        ? [BoxShadow(color: Colors.blueAccent.withOpacity(0.3), blurRadius: 20, spreadRadius: 2), ...defaultShadow]
+        ? [BoxShadow(color: const Color(0xFF8B5CF6).withOpacity(0.4), blurRadius: 20, spreadRadius: 2), ...defaultShadow]
         : defaultShadow;
     
     final effectiveBorder = isHovered
-        ? Border.all(color: Colors.blueAccent.withOpacity(0.5))
+        ? Border.all(color: const Color(0xFF8B5CF6).withOpacity(0.6))
         : defaultBorder;
 
     Widget card = ClipRRect(
@@ -119,11 +119,11 @@ class _AnimatedGlassCardState extends State<_AnimatedGlassCard> {
     final defaultShadow = widget.boxShadow ?? [];
 
     final effectiveShadow = _isHovering 
-        ? [BoxShadow(color: Colors.blueAccent.withOpacity(0.3), blurRadius: 20, spreadRadius: 2), ...defaultShadow]
+        ? [BoxShadow(color: const Color(0xFF8B5CF6).withOpacity(0.4), blurRadius: 20, spreadRadius: 2), ...defaultShadow]
         : defaultShadow;
     
     final effectiveBorder = _isHovering
-        ? Border.all(color: Colors.blueAccent.withOpacity(0.5))
+        ? Border.all(color: const Color(0xFF8B5CF6).withOpacity(0.6))
         : defaultBorder;
         
     return MouseRegion(

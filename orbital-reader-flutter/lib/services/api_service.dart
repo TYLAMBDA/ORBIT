@@ -54,11 +54,12 @@ class ApiService {
       print("DEBUG: Login Data: ${response.data}");
       return response.data;
     } catch (e) {
-       if (e is DioException) {
+       if (e is DioException && e.response?.data != null) {
          print("DEBUG: Login DioError: ${e.response?.statusCode} - ${e.response?.data}");
-      } else {
+         throw Exception(e.response?.data);
+       } else {
          print("DEBUG: Login Error: $e");
-      }
+       }
       rethrow;
     }
   }

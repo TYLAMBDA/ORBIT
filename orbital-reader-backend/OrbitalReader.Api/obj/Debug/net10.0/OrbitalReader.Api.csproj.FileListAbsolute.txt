@@ -134,3 +134,4 @@ D:\ORBIT\orbital-reader-backend\OrbitalReader.Api\obj\Debug\net10.0\refint\Orbit
 D:\ORBIT\orbital-reader-backend\OrbitalReader.Api\obj\Debug\net10.0\OrbitalReader.Api.pdb
 D:\ORBIT\orbital-reader-backend\OrbitalReader.Api\obj\Debug\net10.0\OrbitalReader.Api.genruntimeconfig.cache
 D:\ORBIT\orbital-reader-backend\OrbitalReader.Api\obj\Debug\net10.0\ref\OrbitalReader.Api.dll
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Api\obj\Debug\net10.0\OrbitalReader.Api.sourcelink.json

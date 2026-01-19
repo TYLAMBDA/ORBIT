@@ -43,7 +43,9 @@ class _AuthViewState extends State<AuthView> {
         'switchRegister': "No Signal? Establish Node",
         'switchLogin': "Signal Found? Reconnect",
         'errorCredentials': "Handshake Failed. Sequence Invalid.",
-        'errorFields': "Incomplete Data Packet."
+        'errorFields': "Incomplete Data Packet.",
+        'UserNotFound': "User Identity Not Found.",
+        'InvalidPassword': "Access Sequence Invalid."
       };
     } else {
       return {
@@ -57,7 +59,9 @@ class _AuthViewState extends State<AuthView> {
         'switchRegister': "无信号？建立新节点",
         'switchLogin': "信号已存在？重连",
         'errorCredentials': "握手失败。序列无效。",
-        'errorFields': "数据包丢失。请补全。"
+        'errorFields': "数据包丢失。请补全。",
+        'UserNotFound': "用户身份未找到。",
+        'InvalidPassword': "访问序列无效 (密码错误)。"
       };
     }
   }
@@ -87,7 +91,12 @@ class _AuthViewState extends State<AuthView> {
       }
       // Success is handled by provider updating state, which closes this view or updates UI
     } catch (e) {
-      setState(() => _error = e.toString().replaceAll("Exception: ", ""));
+      String msg = e.toString().replaceAll("Exception: ", "");
+      // Try to translate if key exists, otherwise show raw message
+      if (t.containsKey(msg)) {
+        msg = t[msg]!;
+      }
+      setState(() => _error = msg);
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -96,6 +105,9 @@ class _AuthViewState extends State<AuthView> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final isMobile = size.width < 500;
+    
     return GestureDetector(
       onTap: widget.onClose,
       behavior: HitTestBehavior.opaque,
@@ -115,7 +127,10 @@ class _AuthViewState extends State<AuthView> {
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
                 child: Container(
-                  width: 450,
+                  width: isMobile ? size.width * 0.9 : 450,
+                  constraints: BoxConstraints(
+                    maxHeight: size.height * 0.9,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.blueGrey.shade900.withOpacity(0.8),
                     border: Border.all(color: Colors.blueGrey.shade700.withOpacity(0.5)),
@@ -123,137 +138,139 @@ class _AuthViewState extends State<AuthView> {
                       BoxShadow(color: Colors.black.withOpacity(0.5), blurRadius: 40, offset: const Offset(0, 20))
                     ],
                   ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      // Header Decoration
-                      Container(
-                        height: 4,
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(colors: [Colors.blue, Colors.purple, Colors.blue]),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Header Decoration
+                        Container(
+                          height: 4,
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(colors: [Colors.blue, Colors.purple, Colors.blue]),
+                          ),
                         ),
-                      ),
-                      
-                      Stack(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(40, 40, 40, 0),
-                            child: Column(
-                              children: [
-                                // Icon
-                                Container(
-                                  padding: const EdgeInsets.all(16),
-                                  decoration: BoxDecoration(
-                                    color: Colors.blueGrey.shade800,
-                                    shape: BoxShape.circle,
-                                    border: Border.all(color: Colors.blueGrey.shade700)
-                                  ),
-                                  child: Icon(
-                                    _viewMode == 'login' ? LucideIcons.logIn : LucideIcons.userPlus,
-                                    size: 32,
-                                    color: _viewMode == 'login' ? Colors.blue.shade400 : Colors.purple.shade400,
-                                  ),
-                                ),
-                                const SizedBox(height: 24),
-                                
-                                // Title
-                                Text(
-                                  _viewMode == 'login' ? t['loginTitle']! : t['registerTitle']!,
-                                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white, letterSpacing: 1.0),
-                                ),
-                                const SizedBox(height: 24),
-
-                                // Form
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    if (_viewMode == 'register') ...[
-                                       _buildLabel(t['username']),
-                                       const SizedBox(height: 8),
-                                       _buildInput(_usernameController, LucideIcons.user, "John Doe"),
-                                       const SizedBox(height: 20),
-                                    ].animate(interval: 100.ms).fadeIn().slideY(begin: -0.1, end: 0),
-
-                                    _buildLabel(t['email']),
-                                    const SizedBox(height: 8),
-                                    _buildInput(_emailController, LucideIcons.mail, "name@example.com"),
-                                    const SizedBox(height: 20),
-
-                                    _buildLabel(t['password']),
-                                    const SizedBox(height: 8),
-                                    _buildInput(_passwordController, LucideIcons.lock, "••••••••", obscureText: true),
-                                    const SizedBox(height: 20),
-                                  ],
-                                ),
-
-                                // Error
-                                if (_error != null)
+                        
+                        Stack(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(40, 40, 40, 0),
+                              child: Column(
+                                children: [
+                                  // Icon
                                   Container(
-                                    padding: const EdgeInsets.all(12),
+                                    padding: const EdgeInsets.all(16),
                                     decoration: BoxDecoration(
-                                      color: Colors.red.withOpacity(0.1),
-                                      borderRadius: BorderRadius.circular(12),
-                                      border: Border.all(color: Colors.red.withOpacity(0.2))
+                                      color: Colors.blueGrey.shade800,
+                                      shape: BoxShape.circle,
+                                      border: Border.all(color: Colors.blueGrey.shade700)
                                     ),
-                                    child: Row(
-                                      children: [
-                                        const Icon(LucideIcons.alertCircle, color: Colors.redAccent, size: 16),
-                                        const SizedBox(width: 8),
-                                        Expanded(child: Text(_error!, style: const TextStyle(color: Colors.redAccent, fontSize: 13))),
-                                      ],
+                                    child: Icon(
+                                      _viewMode == 'login' ? LucideIcons.logIn : LucideIcons.userPlus,
+                                      size: 32,
+                                      color: _viewMode == 'login' ? Colors.blue.shade400 : Colors.purple.shade400,
                                     ),
-                                  ).animate().fadeIn().slideY(begin: -0.2, end: 0),
+                                  ),
+                                  const SizedBox(height: 24),
+                                  
+                                  // Title
+                                  Text(
+                                    _viewMode == 'login' ? t['loginTitle']! : t['registerTitle']!,
+                                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white, letterSpacing: 1.0),
+                                  ),
+                                  const SizedBox(height: 24),
 
-                                if (_error != null) const SizedBox(height: 20),
+                                  // Form
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      if (_viewMode == 'register') ...[
+                                         _buildLabel(t['username']),
+                                         const SizedBox(height: 8),
+                                         _buildInput(_usernameController, LucideIcons.user, "John Doe"),
+                                         const SizedBox(height: 20),
+                                      ].animate(interval: 100.ms).fadeIn().slideY(begin: -0.1, end: 0),
 
-                                // Submit Button
-                                CyberButton(
-                                   text: _viewMode == 'login' ? t['loginBtn']! : t['registerBtn']!,
-                                   onPressed: _handleSubmit,
-                                   isPrimary: true,
-                                   width: double.infinity,
-                                   icon: LucideIcons.arrowRight,
-                                ),
-                                const SizedBox(height: 32),
-                              ],
+                                      _buildLabel(t['email']),
+                                      const SizedBox(height: 8),
+                                      _buildInput(_emailController, LucideIcons.mail, "name@example.com"),
+                                      const SizedBox(height: 20),
+
+                                      _buildLabel(t['password']),
+                                      const SizedBox(height: 8),
+                                      _buildInput(_passwordController, LucideIcons.lock, "••••••••", obscureText: true),
+                                      const SizedBox(height: 20),
+                                    ],
+                                  ),
+
+                                  // Error
+                                  if (_error != null)
+                                    Container(
+                                      padding: const EdgeInsets.all(12),
+                                      decoration: BoxDecoration(
+                                        color: Colors.red.withOpacity(0.1),
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(color: Colors.red.withOpacity(0.2))
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          const Icon(LucideIcons.alertCircle, color: Colors.redAccent, size: 16),
+                                          const SizedBox(width: 8),
+                                          Expanded(child: Text(_error!, style: const TextStyle(color: Colors.redAccent, fontSize: 13))),
+                                        ],
+                                      ),
+                                    ).animate().fadeIn().slideY(begin: -0.2, end: 0),
+
+                                  if (_error != null) const SizedBox(height: 20),
+
+                                  // Submit Button
+                                  CyberButton(
+                                     text: _viewMode == 'login' ? t['loginBtn']! : t['registerBtn']!,
+                                     onPressed: _handleSubmit,
+                                     isPrimary: true,
+                                     width: double.infinity,
+                                     icon: LucideIcons.arrowRight,
+                                  ),
+                                  const SizedBox(height: 32),
+                                ],
+                              ),
                             ),
-                          ),
-                          
-                          // Close Button (Absolute relative to Stack)
-                          Positioned(
-                            top: 16, right: 16,
-                            child: IconButton(
-                              icon: const Icon(LucideIcons.x, size: 20, color: Colors.grey),
-                              onPressed: widget.onClose,
-                              hoverColor: Colors.white.withOpacity(0.1),
+                            
+                            // Close Button (Absolute relative to Stack)
+                            Positioned(
+                              top: 16, right: 16,
+                              child: IconButton(
+                                icon: const Icon(LucideIcons.x, size: 20, color: Colors.grey),
+                                onPressed: widget.onClose,
+                                hoverColor: Colors.white.withOpacity(0.1),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
 
-                      // Footer Switcher (Now part of the main Column Flow)
-                      GestureDetector(
-                         onTap: () {
-                           setState(() {
-                             _viewMode = _viewMode == 'login' ? 'register' : 'login';
-                             _error = null;
-                           });
-                         },
-                         child: Container(
-                           width: double.infinity,
-                           padding: const EdgeInsets.all(16),
-                           decoration: BoxDecoration(
-                             color: Colors.black.withOpacity(0.2),
-                             border: Border(top: BorderSide(color: Colors.blueGrey.shade800)),
+                        // Footer Switcher (Now part of the main Column Flow)
+                        GestureDetector(
+                           onTap: () {
+                             setState(() {
+                               _viewMode = _viewMode == 'login' ? 'register' : 'login';
+                               _error = null;
+                             });
+                           },
+                           child: Container(
+                             width: double.infinity,
+                             padding: const EdgeInsets.all(16),
+                             decoration: BoxDecoration(
+                               color: Colors.black.withOpacity(0.2),
+                               border: Border(top: BorderSide(color: Colors.blueGrey.shade800)),
+                             ),
+                             alignment: Alignment.center,
+                             child: Text(
+                               _viewMode == 'login' ? t['switchRegister']! : t['switchLogin']!,
+                               style: const TextStyle(color: Colors.grey, fontSize: 14, fontWeight: FontWeight.w500),
+                             ),
                            ),
-                           alignment: Alignment.center,
-                           child: Text(
-                             _viewMode == 'login' ? t['switchRegister']! : t['switchLogin']!,
-                             style: const TextStyle(color: Colors.grey, fontSize: 14, fontWeight: FontWeight.w500),
-                           ),
-                         ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),

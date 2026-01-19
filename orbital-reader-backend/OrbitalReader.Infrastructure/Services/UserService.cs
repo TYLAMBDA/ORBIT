@@ -56,9 +56,15 @@ public class UserService : IUserService
     public async Task<AuthResponseDto> LoginAsync(LoginDto dto)
     {
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == dto.Email);
-        if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
+        
+        if (user == null)
         {
-            throw new Exception("Invalid credentials");
+            throw new Exception("UserNotFound");
+        }
+
+        if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
+        {
+            throw new Exception("InvalidPassword");
         }
 
         return GenerateAuthResponse(user);

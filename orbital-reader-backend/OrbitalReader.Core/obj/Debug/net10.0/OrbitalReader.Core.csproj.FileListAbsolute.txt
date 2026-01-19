@@ -9,3 +9,4 @@ D:\ORBIT\orbital-reader-backend\OrbitalReader.Core\obj\Debug\net10.0\OrbitalRead
 D:\ORBIT\orbital-reader-backend\OrbitalReader.Core\obj\Debug\net10.0\refint\OrbitalReader.Core.dll
 D:\ORBIT\orbital-reader-backend\OrbitalReader.Core\obj\Debug\net10.0\OrbitalReader.Core.pdb
 D:\ORBIT\orbital-reader-backend\OrbitalReader.Core\obj\Debug\net10.0\ref\OrbitalReader.Core.dll
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Core\obj\Debug\net10.0\OrbitalReader.Core.sourcelink.json

@@ -206,9 +206,9 @@ class _BookCardState extends State<_BookCard> {
                                     ClipRRect(
                                         borderRadius: BorderRadius.circular(2),
                                         child: LinearProgressIndicator(
-                                            value: widget.book.progress / 100,
-                                            backgroundColor: Colors.white24,
-                                            valueColor: const AlwaysStoppedAnimation(Colors.cyanAccent), // Neon Cyan
+                                        value: widget.book.progress / 100,
+                                            backgroundColor: const Color(0xFF8B5CF6),
+                                            valueColor: const AlwaysStoppedAnimation(Color(0xFF8B5CF6)), // Purple
                                             minHeight: 3,
                                         ),
                                     ),
@@ -238,7 +238,7 @@ class _BookCardState extends State<_BookCard> {
                                               const PopupMenuItem(
                                                 value: 'open',
                                                 child: Row(children: [
-                                                  Icon(LucideIcons.bookOpen, color: Colors.cyanAccent, size: 18),
+                                                  Icon(LucideIcons.bookOpen, color: Color(0xFF8B5CF6), size: 18),
                                                   SizedBox(width: 12),
                                                   Text("Access Data", style: TextStyle(color: Colors.white))
                                                 ]),

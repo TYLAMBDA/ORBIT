@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       title: 'Orbital Reader',
       theme: ThemeData(
         brightness: Brightness.dark,
-        scaffoldBackgroundColor: const Color(0xFF020617), // slate-950
+        scaffoldBackgroundColor: const Color(0xFF0A0E1A), // deep blue-black
         fontFamily: 'Roboto', 
         useMaterial3: true,
       ),
@@ -94,7 +94,7 @@ class OrbitalScaffold extends StatelessWidget {
                gradient: RadialGradient(
                  center: Alignment.center,
                  radius: 1.5,
-                 colors: [Color(0xFF1E293B), Color(0xFF020617)],
+                 colors: [Color(0xFF1E1B4B), Color(0xFF0A0E1A)], // Deep purple to blue-black
                ),
              ),
           ),
@@ -220,9 +220,18 @@ class OrbitalScaffold extends StatelessWidget {
           Positioned(
             top: 24,
             right: 24,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
+            child: IgnorePointer(
+              ignoring: provider.autoHide && !isOrbVisible,
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 300),
+                opacity: (provider.autoHide && !isOrbVisible) ? 0.0 : 1.0,
+                child: AnimatedScale(
+                  duration: const Duration(milliseconds: 300),
+                  scale: (provider.autoHide && !isOrbVisible) ? 0.95 : 1.0,
+                  curve: Curves.easeOutCubic,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
                 if (provider.isOfflineMode) ...[
                     GestureDetector( // Added Click to Toggle Off
                       onTap: () => provider.setIsOfflineMode(false),
@@ -318,7 +327,10 @@ class OrbitalScaffold extends StatelessWidget {
               ],
             ),
           ),
-        ],
+      ),
+    ),
+  ),
+],
       ),
     );
   }

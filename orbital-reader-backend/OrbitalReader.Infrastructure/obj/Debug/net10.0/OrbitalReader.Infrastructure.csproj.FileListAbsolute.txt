@@ -17,3 +17,4 @@ D:\ORBIT\orbital-reader-backend\OrbitalReader.Infrastructure\obj\Debug\net10.0\r
 D:\ORBIT\orbital-reader-backend\OrbitalReader.Infrastructure\obj\Debug\net10.0\OrbitalReader.Infrastructure.pdb
 D:\ORBIT\orbital-reader-backend\OrbitalReader.Infrastructure\obj\Debug\net10.0\OrbitalReader.Infrastructure.genruntimeconfig.cache
 D:\ORBIT\orbital-reader-backend\OrbitalReader.Infrastructure\obj\Debug\net10.0\ref\OrbitalReader.Infrastructure.dll
+D:\ORBIT\orbital-reader-backend\OrbitalReader.Infrastructure\obj\Debug\net10.0\OrbitalReader.Infrastructure.sourcelink.json

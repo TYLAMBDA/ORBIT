@@ -139,29 +139,11 @@ class _OrbitMenuState extends State<OrbitMenu> {
         // REVERT: Back to standard AnimatedPositioned without Animate wrapper
         // This ensures reliable visibility and position updates, fixing the disappearance issue.
         // Fix: AnimatedPositioned must be direct child of Stack. Animate wraps the *content*.
-        return AnimatedPositioned(
-          key: ValueKey('${item.id}_${widget.currentDock}'), // Force recreate on dock change
-          duration: Duration(milliseconds: 400 + (index * 30)), 
-          curve: Curves.easeOutCubic, 
-          // Logic: If just hiding/showing (same dock), AnimatedPositioned handles it.
-          // If Dock changes (new Key), we start at 'target' but use Animate to slide in.
-          left: widget.isHidden && widget.currentDock != DockPosition.center ? hiddenX - 20 : targetX - 20, 
-          top: widget.isHidden && widget.currentDock != DockPosition.center ? hiddenY - 20 : targetY - 20,
-          child: Animate(
-            effects: [
-               // Only run entry animation if visible and it's a fresh mount (Dock Change)
-               if (!widget.isHidden) 
-                  MoveEffect(
-                      begin: widget.currentDock == DockPosition.left ? const Offset(-40, 0) :
-                             widget.currentDock == DockPosition.right ? const Offset(40, 0) :
-                             widget.currentDock == DockPosition.top ? const Offset(0, -40) :
-                             widget.currentDock == DockPosition.bottom ? const Offset(0, 40) : Offset.zero,
-                      end: Offset.zero,
-                      curve: Curves.easeOutCubic,
-                      duration: Duration(milliseconds: 400 + (index * 30))
-                  ),
-            ],
-            child: AnimatedOpacity(
+        return Positioned(
+          key: ValueKey('${item.id}_${widget.currentDock}'),
+          left: targetX - 20, 
+          top: targetY - 20,
+          child: AnimatedOpacity(
               duration: const Duration(milliseconds: 300),
               opacity: widget.isHidden ? 0.0 : 1.0,
               child: AnimatedScale(
@@ -231,7 +213,6 @@ class _OrbitMenuState extends State<OrbitMenu> {
                 ),
               ),
             ),
-          ),
         );
       }).toList());
 
